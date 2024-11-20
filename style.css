@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+main {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background);
+}
+
+.item {
+    display: none;
+    width: 100%;
+    height: 100vh; /* Garantir que o item ocupe toda a altura da tela */
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    background-color: var(--background);
+    transform: translateY(50%); /* Inicia abaixo do centro */
+}
+
+.item.active {
+    display: block;
+    transform: translateY(0); /* Quando ativo, vai para o centro */
+}
+
+.title {
+    font-size: 12rem;
+    color: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Centraliza o título */
+    z-index: 1;
+}
+
+.fruit {
+    width: 90%;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza a imagem da fruta */
+    z-index: 2;
+}
+
+.refri {
+    z-index: 3;
+    width: 600px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Centraliza a lata */
+}
+
+#prev, #next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    color: #333;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 5;
+    border-radius: 50%;
+}
+
+#prev {
+    left: 30px;
+}
+
+#next {
+    right: 30px;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50%); /* Começa de baixo (fora da tela) */
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0); /* Vai para o centro da tela */
+        opacity: 1;
+    }
+}
+
+.item.active .fruit,
+.item.active .title,
+.item.active .refri {
+    animation: slideUp 0.7s ease-in-out; /* Aplica a animação para todos os itens /*/
+    will-change: transform, opacity; /* Melhora o desempenho da animação  */
+}
+
+/* Responsividade para telas grandes (desktops) */
+@media (min-width: 1025px) {
+    .title {
+        font-size: 12rem; 
+    }
+
+    .fruit {
+        width: 90%; 
+    }
+
+    .refri {
+        width: 600px; 
+    }
+
+    #prev, #next {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+}
